@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttachToChrome", "AttachToChrome.csproj", "{186DA633-69A1-4024-BD07-40FF7B7DB9F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttachToChrome.Tests", "..\AttachToChrome.Tests\AttachToChrome.Tests.csproj", "{3A761676-F2D3-4A16-908E-07C114AFFE4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{186DA633-69A1-4024-BD07-40FF7B7DB9F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{186DA633-69A1-4024-BD07-40FF7B7DB9F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{186DA633-69A1-4024-BD07-40FF7B7DB9F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{186DA633-69A1-4024-BD07-40FF7B7DB9F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A761676-F2D3-4A16-908E-07C114AFFE4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A761676-F2D3-4A16-908E-07C114AFFE4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A761676-F2D3-4A16-908E-07C114AFFE4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A761676-F2D3-4A16-908E-07C114AFFE4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D036052-4D96-4ED4-B986-9AC52B0BA51A}
+	EndGlobalSection
+EndGlobal

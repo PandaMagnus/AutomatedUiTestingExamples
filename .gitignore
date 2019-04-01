@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/AttachToChrome/.vs/AttachToChrome/v15
+/AttachToChrome/bin/Debug
+/AttachToChrome/obj/Debug
+/AttachToChrome/packages
+/AttachToChrome.Tests/obj/Debug
+/AttachToChrome.Tests/Properties
+/AttachToChrome/Properties
+/AttachToChrome/packages.config
+/AttachToChrome.Tests/bin/Debug
