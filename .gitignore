@@ -11,3 +11,9 @@
 /AttachToChrome/Properties
 /AttachToChrome/packages.config
 /AttachToChrome.Tests/bin/Debug
+*.lock
+*.ide-wal
+*.ide-shm
+*.ide
+*.suo
+/AttachToChrome.Tests/chromedriver_74.exe
