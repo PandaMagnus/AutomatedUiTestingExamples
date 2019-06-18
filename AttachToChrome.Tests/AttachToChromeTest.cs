@@ -9,25 +9,6 @@ namespace AttachToChrome.Tests
     [TestClass]
     public class AttachToChromeTest
     {
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-
         [TestInitialize()]
         public void MyTestInitialize()
         {
@@ -36,14 +17,11 @@ namespace AttachToChrome.Tests
             {
                 Process.Start(@"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe");
             }
-            Process[] btb = Process.GetProcessesByName("AttachToChrome");
-            if (btb.Length > 0)
-            {
-                foreach (var p in btb)
-                {
-                    p.Kill();
-                }
-            }
+            // Check for an existing instance of our WPF app and kill if needed
+            // Since we can get into a bad state where chromedriver launches, but does not successfully attach,
+            // Find and kill any chromedriver processes, too.
+            // Note: this won't work if running tests in parallel on the same machine.
+            KillProcessesByName("AttachToChrome", "chromedriver");
 
             Application.LaunchApplication();
         }
@@ -52,19 +30,29 @@ namespace AttachToChrome.Tests
         public void MyTestCleanup()
         {
             Application.CloseApplication();
-            _Page.Driver.Quit();
-            // Because we attached, the browser itself won't close.
+            // Because we attached, the browser itself won't close on normal dispose, so explicitely call close even when we ordinarily wouldn't want to.
+            if(_Page.Driver != null)
+            {
+                _Page.Driver.Close();
+                _Page.Driver.Dispose();
+            }
+            // Note: this won't work if running tests in parallel on the same machine.
+            KillProcessesByName("AttachToChrome", "chromedriver");
         }
 
 
         [TestMethod]
         public void LaunchChromeAndAttach()
         {
-            // Do this properly before blog
-            Task.Delay(5000).Wait();
-            Application.Session.SwitchTo().Window(Application.Session.CurrentWindowHandle);
+            // Open WPF application, make sure a button is present, then click it to launch Chrome
+            Assert.IsTrue(_Window.LaunchBrowserButton.Displayed, 
+                "The button that launches the IntelliTect blog page never appears when we expected it to be displayed.");
             _Window.LaunchBrowserButton.Click();
+
+            // Attach to new Chrome instance
             _Page.AttachToChrome();
+
+            // Verify Chrome launched to the correct page
             Assert.AreEqual("https://intellitect.com/blog/", _Page.Driver.Url);
             Assert.IsTrue(_Page.BlogList.Displayed);
             Assert.IsTrue(_Page.BlogHeadings.Count > 0);
@@ -72,5 +60,20 @@ namespace AttachToChrome.Tests
 
         private Window _Window => new Window();
         private Page _Page { get; } = new Page();
+
+        private void KillProcessesByName(params string[] namesOfProcessesToKill)
+        {
+            foreach(var name in namesOfProcessesToKill)
+            {
+                Process[] existingProcesses = Process.GetProcessesByName(name);
+                if (existingProcesses.Length > 0)
+                {
+                    foreach (var p in existingProcesses)
+                    {
+                        p.Kill();
+                    }
+                }
+            }
+        }
     }
 }

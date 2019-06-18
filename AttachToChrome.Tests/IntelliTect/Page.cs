@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using Polly;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,18 +15,17 @@ namespace AttachToChrome.Tests.IntelliTect
 
         public void AttachToChrome()
         {
-            // Do this the proper way before writing blog
-            Task.Delay(5000).Wait();
             ChromeOptions options = new ChromeOptions();
             options.DebuggerAddress = "127.0.0.1:9222";
-            Driver = new ChromeDriver(options);
+
+            // Polly probably isn't needed in a single scenario like this, but can be useful in a broader automation project
+            var policy = Policy
+                .Handle<InvalidOperationException>()
+                .WaitAndRetry(10, t => TimeSpan.FromSeconds(1));
+            policy.Execute(() => 
+                {
+                    Driver = new ChromeDriver(options);
+                });
         }
-
-        
-
-        //private IWebElement WaitForElementToExist()
-        //{
-
-        //}
     }
 }
