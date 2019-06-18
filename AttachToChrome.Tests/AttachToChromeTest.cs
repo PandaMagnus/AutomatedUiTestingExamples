@@ -59,7 +59,7 @@ namespace AttachToChrome.Tests
         }
 
         private Window _Window => new Window();
-        private Page _Page { get; } = new Page();
+        private PageUnderTest _Page { get; } = new PageUnderTest();
 
         private void KillProcessesByName(params string[] namesOfProcessesToKill)
         {

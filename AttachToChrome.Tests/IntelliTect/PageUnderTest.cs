@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AttachToChrome.Tests.IntelliTect
 {
-    public class Page
+    public class PageUnderTest
     {
         public IWebDriver Driver { get; private set; }
         public IWebElement BlogList => Driver.FindElement(By.CssSelector("div[class^='template-blog']"));
