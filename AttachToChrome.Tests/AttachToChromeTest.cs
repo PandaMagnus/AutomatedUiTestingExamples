@@ -12,8 +12,8 @@ namespace AttachToChrome.Tests
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            Process[] wap = Process.GetProcessesByName("WinAppDriver");
-            if (wap.Length < 1)
+            Process[] wad = Process.GetProcessesByName("WinAppDriver");
+            if (wad.Length < 1)
             {
                 Process.Start(@"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe");
             }
@@ -46,7 +46,7 @@ namespace AttachToChrome.Tests
         {
             // Open WPF application, make sure a button is present, then click it to launch Chrome
             Assert.IsTrue(_Window.LaunchBrowserButton.Displayed, 
-                "The button that launches the IntelliTect blog page never appears when we expected it to be displayed.");
+                "Expected button never appears");
             _Window.LaunchBrowserButton.Click();
 
             // Attach to new Chrome instance
