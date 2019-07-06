@@ -31,10 +31,10 @@ namespace AttachToChrome.Tests
         {
             Application.CloseApplication();
             // Because we attached, the browser itself won't close on normal dispose, so explicitely call close even when we ordinarily wouldn't want to.
-            if(_Page.Driver != null)
+            if(Page.Driver != null)
             {
-                _Page.Driver.Close();
-                _Page.Driver.Dispose();
+                Page.Driver.Close();
+                Page.Driver.Dispose();
             }
             // Note: this won't work if running tests in parallel on the same machine.
             KillProcessesByName("AttachToChrome", "chromedriver");
@@ -45,21 +45,21 @@ namespace AttachToChrome.Tests
         public void LaunchChromeAndAttach()
         {
             // Open WPF application, make sure a button is present, then click it to launch Chrome
-            Assert.IsTrue(_Window.LaunchBrowserButton.Displayed, 
-                "Expected button never appears");
-            _Window.LaunchBrowserButton.Click();
+            Assert.IsTrue(Window.LaunchBrowserButton.Displayed, 
+                "Expected button never appears.");
+            Window.LaunchBrowserButton.Click();
 
             // Attach to new Chrome instance
-            _Page.AttachToChrome();
+            Page.AttachToChrome();
 
             // Verify Chrome launched to the correct page
-            Assert.AreEqual("https://intellitect.com/blog/", _Page.Driver.Url);
-            Assert.IsTrue(_Page.BlogList.Displayed);
-            Assert.IsTrue(_Page.BlogHeadings.Count > 0);
+            Assert.AreEqual("https://intellitect.com/blog/", Page.Driver.Url);
+            Assert.IsTrue(Page.BlogList.Displayed);
+            Assert.IsTrue(Page.BlogHeadings.Count > 0);
         }
 
-        private Window _Window => new Window();
-        private PageUnderTest _Page { get; } = new PageUnderTest();
+        private Window Window => new Window();
+        private PageUnderTest Page { get; } = new PageUnderTest();
 
         private void KillProcessesByName(params string[] namesOfProcessesToKill)
         {
