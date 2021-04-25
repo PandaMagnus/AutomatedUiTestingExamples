@@ -2,18 +2,12 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/AttachToChrome/.vs/AttachToChrome/v15
-/AttachToChrome/bin/Debug
-/AttachToChrome/obj/Debug
-/AttachToChrome/packages
-/AttachToChrome.Tests/obj/Debug
-/AttachToChrome.Tests/Properties
-/AttachToChrome/Properties
-/AttachToChrome/packages.config
-/AttachToChrome.Tests/bin/Debug
 *.lock
 *.ide-wal
 *.ide-shm
 *.ide
 *.suo
-/AttachToChrome.Tests/chromedriver_74.exe
+obj
+.vs
+bin
+packages
